@@ -4,10 +4,10 @@
     {{else}}
         <div class="participants">
             {{#if videoService.localMedia}}
-                <video class="local" autoplay muted="muted" style="transform: scaleX(-1)"/>
+                {{video-tag stream=videoService.localMedia muted=true}}
             {{/if}}
             {{#each participants as |participant|}}
-                <video autoplay data-peer-id="{{participant.peer.id}}"/>
+                {{video-tag stream=participant.peer.stream}}
             {{/each}}
         </div>
         <a href="#" {{action 'leaveVideo'}}>Hangup</a>

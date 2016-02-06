@@ -32,7 +32,16 @@ export default Ember.Service.extend(Ember.Evented, {
         this.on('localMediaStarted', this.connectToRoom.bind(this));
 
         window.videochat = this;
-        this.get('store').pushPayload({people: [ { id: 'xander', name: 'Xander' } ] });
+        //this.get('store').pushPayload({people: [ { id: 'xander', name: 'Xander' } ] });
+
+        const email = this.get('store').createRecord('encryptedEmail', {
+            id: '123',
+            sender: 'someone@example.com',
+            subject: 'super secrete info',
+            body: 'A whole bunch of info that is hidden'
+        });
+        email.save();
+
     },
 
     joinRoom(media) {
@@ -45,6 +54,7 @@ export default Ember.Service.extend(Ember.Evented, {
                 this.trigger('localMediaStarted', stream);
             }
         });
+        this.get('store').findRecord('encrypted-email', '123');
     },
 
     leaveRoom() {
@@ -71,15 +81,15 @@ export default Ember.Service.extend(Ember.Evented, {
     },
 
     videoAdded(peer) {
-        this.get('store').find('person', peer.nick).then((person) => {
-            person.set('peer', peer);
-            this.trigger('videoAdded', person);
-        });
+        // this.get('store').find('person', peer.nick).then((person) => {
+        //     person.set('peer', peer);
+        //     this.trigger('videoAdded', person);
+        // });
     },
 
     videoRemoved(peer) {
-        this.get('store').find('person', peer.nick).then((person) => {
-            this.trigger('videoRemoved', person);
-        });
+        // this.get('store').find('person', peer.nick).then((person) => {
+        //     this.trigger('videoRemoved', person);
+        // });
     }
 });

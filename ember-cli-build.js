@@ -12,6 +12,9 @@ module.exports = function(defaults) {
 
   app.import('bower_components/simplewebrtc/simplewebrtc.bundle.js');
 
+  app.import('bower_components/crypto-js/crypto-js.js');
+
+
   // Use `app.import` to add additional libraries to the generated
   // output files.
   //
